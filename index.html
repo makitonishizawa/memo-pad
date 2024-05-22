@@ -22,11 +22,24 @@
         <ul>
             <li id="save">保存</li>
             <li id="clear">削除</li>
-            <li id="clear">答え</li>
+            <li id="answer">答え</li>
         </ul>
+        <div id="hantei">
+            <button id="right">正解</button>
+            <button id="wrong">不正解</button>
+        </div>
+
+        <div>
+            html(storedValue[3])
+        </div>
+
     </main>
 
     <script>
+        var seikai =0
+        var fuseikai =0
+
+
         $("main").slideDown(500);
         
         //1.Save クリックイベント
@@ -47,15 +60,45 @@
             $("#text_area").val("");
         })
 
-
-
         //3.ページ読み込み：保存データ取得表示
-        if(localStorage.getItem("memo")){
-            const value = localStorage.getItem("memo");
-            $("#text_area").val(value);
+        $("#answer").on("click", function(){
+            
+            const word= $("#text_area").val();
+            if(localStorage.getItem(word)){
+                const str = localStorage.getItem(word);
+                var storedValue = JSON.parse(str);
+                $("#text_area2").val(storedValue[0]);
+                console.dir(storedValue[0])
+            }
+        })
 
-        }
+        //4.正解数保存
+        $("#right").on("click", function(){
+            const word= $("#text_area").val();
+            const mean= $("#text_area2").val();
+            seikai= seikai+1
+            seikairitsu = seikai/(seikai + fuseikai)
+            var array =[mean,seikai,fuseikai,seikairitsu];
+            console.dir(array)
+            var total = JSON.stringify(array);
+            localStorage.setItem(word,total)
+            console.dir(total)
 
+        })
+        $("#wrong").on("click", function(){
+            const word= $("#text_area").val();
+            const mean= $("#text_area2").val();
+            fuseikai= fuseikai+1
+            seikairitsu = seikai/(seikai + fuseikai)
+            var array =[mean,seikai,fuseikai,seikairitsu];
+            console.dir(array)
+            var total = JSON.stringify(array);
+            localStorage.setItem(word,total)
+            console.dir(total)
+
+        })
+
+        
 
 
         //ロード時に表示
