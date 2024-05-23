@@ -6,6 +6,7 @@
     <title>英単語帳</title>
     <script src="js/jquery-2.1.3.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
@@ -163,24 +164,24 @@
                 
             //ダミー2
                 var dummy2 = Math.floor(Math.random()*keys.length)
-                var randomKey2 = getRandomLocalStorageKey();
-                const str4 = localStorage.getItem(randomKey2);
-                var storedValue3 = JSON.parse(str3);
+                var randomKey3 = getRandomLocalStorageKey();
+                const str4 = localStorage.getItem(randomKey3);
+                var storedValue4 = JSON.parse(str4);
                 
             //ランダム数値発生させ、ボックスに引き込む
                 var random =Math.floor(Math.random()*3)
-                    if (random =0){
+                    if (random == 0){
                         $("#sentaku1").html(storedValue2[0]);
-                        $("#sentaku2").html(storedValue2[0]);
-                        $("#sentaku3").html(storedValue2[0]);
+                        $("#sentaku2").html(storedValue3[0]);
+                        $("#sentaku3").html(storedValue4[0]);
 
-                    }else if (random = 1){
-                        $("#sentaku1").html(storedValue2[dummy1]);
+                    }else if (random == 1){
+                        $("#sentaku1").html(storedValue4[0]);
                         $("#sentaku2").html(storedValue2[0]);
-                        $("#sentaku3").html(storedValue2[dummy2]);
+                        $("#sentaku3").html(storedValue3[0]);
                     }else {
-                        $("#sentaku1").html(storedValue2[dummy2]);
-                        $("#sentaku2").html(storedValue2[dummy1]);
+                        $("#sentaku1").html(storedValue3[0]);
+                        $("#sentaku2").html(storedValue4[0]);
                         $("#sentaku3").html(storedValue2[0]);
                     }
                             console.log(random);  
