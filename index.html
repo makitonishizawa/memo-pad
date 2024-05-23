@@ -24,6 +24,9 @@
             <li id="answer">答え</li>
         </ul>
        
+        <div id="test">テスト</div>
+        <div id="question"></div>
+
         <div id="sentakushi">
             <button id="sentaku1"></button>
             <button id="sentaku2"></button>
@@ -55,7 +58,8 @@
         $("#save").on("click", function(){
             const word= $("#text_area").val();
             const mean= $("#text_area2").val();
-            localStorage.setItem(word,mean);
+            var dataToSave = JSON.stringify([mean, 0, 0, 0]);
+            localStorage.setItem(word,dataToSave);
             alert("saveしました")
         })
 
@@ -145,6 +149,7 @@
             }
             //LocalStorage内の単語をテキストボックスに表示
             $('#next').on('click', function() {
+                $('#text_area2').val("")
                 var randomKey = getRandomLocalStorageKey();
                 $('#text_area').text(randomKey ? randomKey : "LocalStorageが空です。");
             
@@ -161,6 +166,8 @@
             var randomKey2 = getRandomLocalStorageKey();
             const str3 = localStorage.getItem(randomKey2);
             var storedValue3 = JSON.parse(str3);
+            console.log(keys.length)
+    
                 
             //ダミー2
                 var dummy2 = Math.floor(Math.random()*keys.length)
