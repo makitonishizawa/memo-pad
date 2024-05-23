@@ -12,7 +12,7 @@
 <body>
 
     <header>
-        <h1 id="top">英単語帳</h1>
+        <h1 id="top">英単語帳1</h1>
     </header>
 
     <main style="display:none;">
@@ -152,6 +152,7 @@
                 $('#text_area2').val("")
                 var randomKey = getRandomLocalStorageKey();
                 $('#text_area').text(randomKey ? randomKey : "LocalStorageが空です。");
+                console.log(randomKey)
             
             //対応する意味を表示
                 const str2 = localStorage.getItem(randomKey);
