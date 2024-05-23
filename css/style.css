@@ -4,6 +4,12 @@ body{
     text-align:left;
     font-size: 32px;
 }
+#top{
+    font-size: 40px;
+    margin-bottom: 5px;
+}
+
+
 header{
     background-color: #fff;
     border-bottom: 1px solid #ccc;
@@ -30,6 +36,8 @@ ul{
     display:table;  /* 定義 */
     table-layout: fixed;
     width:100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 li{
     list-style-type:none;
@@ -37,20 +45,96 @@ li{
     background-color: #FFF;
     display:table-cell;  /* 定義 */
     cursor: pointer;
+    text-align: center;
+
 }
 li:hover{
     background: #0066CC;
     color:#fff;
 }
-textarea{
-  margin: 3%;
+#text_area{
+  margin: 1%;
   width: 95%;
-  height: 230px;
+  height: 50px;
   font-size:80%;
   box-shadow: 3px 3px 3px 3px #555;
 }
-#hantei {
-    flex: content;
-    
+#text_area2{
+    margin: 1%;
+    width: 95%;
+    height: 100px;
+    font-size:80%;
+    box-shadow: 3px 3px 3px 3px #555;
+  }
 
+  #sentakushi {
+    display:flex;
+    justify-content: center;
+}
+
+  #sentaku1 {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 30px;
+    width: 200px;
+    border-radius: 10px;
+    height: 50px;
+    margin-bottom: 20px;
+}
+#sentaku2 {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 30px;
+    width: 200px;
+    border-radius: 10px;
+    height: 50px;
+    margin-bottom: 20px;
+}
+#sentaku3 {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 30px;
+    width: 200px;
+    border-radius: 10px;
+    height: 50px;
+    margin-bottom: 20px;
+}
+
+#hantei {
+    display:flex;
+    justify-content: center;
+}
+
+#right {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 30px;
+    width: 120px;
+    border-radius: 10px;
+}
+#wrong {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 30px;
+    width: 120px;
+    border-radius: 10px;
+}
+#next {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 30px;
+    width: 120px;
+    border-radius: 10px;
+}
+
+
+#kekka {
+    display: flex;
+    justify-content: center;
+}
+#title {
+    font-size: 40px;
+}
+#seikairitsu {
+    font-size: 40px;
 }

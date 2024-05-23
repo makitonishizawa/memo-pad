@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>英単語帖</title>
+    <title>英単語帳</title>
     <script src="js/jquery-2.1.3.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -11,26 +11,33 @@
 <body>
 
     <header>
-        <h1>英単語帳</h1>
+        <h1 id="top">英単語帳</h1>
     </header>
 
     <main style="display:none;">
-        単語
-        <textarea id="text_area"></textarea>
-        意味
-        <textarea id="text_area2"></textarea>
+        <textarea id="text_area" placeholder="英単語"></textarea>
+        <textarea id="text_area2" placeholder="意味"></textarea>
         <ul>
             <li id="save">保存</li>
             <li id="clear">削除</li>
             <li id="answer">答え</li>
         </ul>
+       
+        <div id="sentakushi">
+            <button id="sentaku1"></button>
+            <button id="sentaku2"></button>
+            <button id="sentaku3"></button>
+        </div>
+    
         <div id="hantei">
             <button id="right">正解</button>
             <button id="wrong">不正解</button>
+            <button id="next">Next</button>
         </div>
 
-        <div>
-            html(storedValue[3])
+        <div id="kekka">
+            <h1 id="title">正解率:</h1>
+            <h1 id="seikairitsu"></h1>
         </div>
 
     </main>
@@ -41,6 +48,7 @@
 
 
         $("main").slideDown(500);
+        $("#title").hide();
         
         //1.Save クリックイベント
         $("#save").on("click", function(){
@@ -48,8 +56,6 @@
             const mean= $("#text_area2").val();
             localStorage.setItem(word,mean);
             alert("saveしました")
-
-
         })
 
         //2.clear クリックイベント
@@ -76,6 +82,10 @@
         $("#right").on("click", function(){
             const word= $("#text_area").val();
             const mean= $("#text_area2").val();
+            const str = localStorage.getItem(word);
+            var storedValue = JSON.parse(str)
+            seikai = storedValue[1]
+            fuseikai = storedValue[2]
             seikai= seikai+1
             seikairitsu = seikai/(seikai + fuseikai)
             var array =[mean,seikai,fuseikai,seikairitsu];
@@ -83,11 +93,25 @@
             var total = JSON.stringify(array);
             localStorage.setItem(word,total)
             console.dir(total)
+            
+            if(localStorage.getItem(word)){
+                const str = localStorage.getItem(word);
+                var storedValue = JSON.parse(str);
+                $("#text_area2").val(storedValue[0]);
+                console.dir(storedValue[0])
+            }
+            let round = Math.round(storedValue[3]*100)
+            $("#seikairitsu").html(round + "%")
+            $("#title").show()
 
         })
         $("#wrong").on("click", function(){
             const word= $("#text_area").val();
             const mean= $("#text_area2").val();
+            const str = localStorage.getItem(word);
+            var storedValue = JSON.parse(str)
+            seikai = storedValue[1]
+            fuseikai = storedValue[2]
             fuseikai= fuseikai+1
             seikairitsu = seikai/(seikai + fuseikai)
             var array =[mean,seikai,fuseikai,seikairitsu];
@@ -96,11 +120,74 @@
             localStorage.setItem(word,total)
             console.dir(total)
 
+            if(localStorage.getItem(word)){
+                const str = localStorage.getItem(word);
+                var storedValue = JSON.parse(str);
+                $("#text_area2").val(storedValue[0]);
+                console.dir(storedValue[0])
+            }
+            let round = Math.round(storedValue[3]*100)
+            $("#seikairitsu").html(round + "%")
+            $("#title").show()
+
         })
 
+        // 次の問題へ
+        $(document).ready(function() {
+            function getRandomLocalStorageKey() {
+                var keys = Object.keys(localStorage);
+                if (keys.length === 0) {
+                    return null;
+                }
+                var randomIndex = Math.floor(Math.random() * keys.length);
+                return keys[randomIndex];
+            }
+            //LocalStorage内の単語をテキストボックスに表示
+            $('#next').on('click', function() {
+                var randomKey = getRandomLocalStorageKey();
+                $('#text_area').text(randomKey ? randomKey : "LocalStorageが空です。");
+            
+            //対応する意味を表示
+                const str2 = localStorage.getItem(randomKey);
+                var storedValue2 = JSON.parse(str2);
+                
+            //ダミー１ 
+            var keys = Object.keys(localStorage);
+                if (keys.length === 0) {
+                    return null;
+                }    
+            var dummy1 = Math.floor(Math.random()*keys.length)
+            var randomKey2 = getRandomLocalStorageKey();
+            const str3 = localStorage.getItem(randomKey2);
+            var storedValue3 = JSON.parse(str3);
+                
+            //ダミー2
+                var dummy2 = Math.floor(Math.random()*keys.length)
+                var randomKey2 = getRandomLocalStorageKey();
+                const str4 = localStorage.getItem(randomKey2);
+                var storedValue3 = JSON.parse(str3);
+                
+            //ランダム数値発生させ、ボックスに引き込む
+                var random =Math.floor(Math.random()*3)
+                    if (random =0){
+                        $("#sentaku1").html(storedValue2[0]);
+                        $("#sentaku2").html(storedValue2[0]);
+                        $("#sentaku3").html(storedValue2[0]);
+
+                    }else if (random = 1){
+                        $("#sentaku1").html(storedValue2[dummy1]);
+                        $("#sentaku2").html(storedValue2[0]);
+                        $("#sentaku3").html(storedValue2[dummy2]);
+                    }else {
+                        $("#sentaku1").html(storedValue2[dummy2]);
+                        $("#sentaku2").html(storedValue2[dummy1]);
+                        $("#sentaku3").html(storedValue2[0]);
+                    }
+                            console.log(random);  
+
+            });
         
-
-
+        });
         //ロード時に表示
         //※こんなこともできる例
     </script>
