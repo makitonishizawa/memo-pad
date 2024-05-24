@@ -39,6 +39,8 @@
             <button id="next">Next</button>
         </div>
 
+        <div id="hantei2"></div>
+
         <div id="kekka">
             <h1 id="title">正解率:</h1>
             <h1 id="seikairitsu"></h1>
@@ -49,7 +51,6 @@
     <script>
         var seikai =0
         var fuseikai =0
-
 
         $("main").slideDown(500);
         $("#title").hide();
@@ -149,6 +150,9 @@
             }
             //LocalStorage内の単語をテキストボックスに表示
             $('#next').on('click', function() {
+                $("#hantei2").hide()
+                $("#kekka").hide()
+
                 $('#text_area2').val("")
                 var randomKey = getRandomLocalStorageKey();
                 $('#text_area').text(randomKey ? randomKey : "LocalStorageが空です。");
@@ -193,9 +197,217 @@
                         $("#sentaku3").html(storedValue2[0]);
                     }
                             console.log(random);  
+        
+                // ボタン1をクリック
+                $('#sentaku1').on('click', function() {
+                    const word= $("#text_area").val();
+                    if(localStorage.getItem(word)){
+                        const str = localStorage.getItem(word);
+                        var storedValue = JSON.parse(str);
+                        $("#text_area2").val(storedValue[0]);
+                        console.dir(storedValue[0])
+                    }
+                    if(random ==0){    
+                        const word= $("#text_area").val();
+                        const mean= $("#text_area2").val();
+                        const str = localStorage.getItem(word);
+                        var storedValue = JSON.parse(str)
+                        seikai = storedValue[1]
+                        fuseikai = storedValue[2]
+                        seikai= seikai+1
+                        seikairitsu = seikai/(seikai + fuseikai)
+                        var array =[mean,seikai,fuseikai,seikairitsu];
+                        console.dir(array)
+                        var total = JSON.stringify(array);
+                        localStorage.setItem(word,total)
+                        console.dir(total)
+                    
+                        if(localStorage.getItem(word)){
+                        const str = localStorage.getItem(word);
+                        var storedValue = JSON.parse(str);
+                        $("#text_area2").val(storedValue[0]);
+                        console.dir(storedValue[0])
+                        }
+                        let round = Math.round(storedValue[3]*100)
+                        $("#seikairitsu").html(round + "%")
+                        $("#seikairitsu").show()
+                        $("#title").show()
+                        $("#hantei2").html("正解")
+                        $("#hantei2").show()
+                        console.log(round)
+
+                    }else{
+                        const word= $("#text_area").val();
+                        const mean= $("#text_area2").val();
+                        const str = localStorage.getItem(word);
+                        var storedValue = JSON.parse(str)
+                        seikai = storedValue[1]
+                        fuseikai = storedValue[2]
+                        fuseikai= fuseikai+1
+                        seikairitsu = seikai/(seikai + fuseikai)
+                        var array =[mean,seikai,fuseikai,seikairitsu];
+                        console.dir(array)
+                        var total = JSON.stringify(array);
+                        localStorage.setItem(word,total)
+                        console.dir(total)
+
+                        if(localStorage.getItem(word)){
+                            const str = localStorage.getItem(word);
+                            var storedValue = JSON.parse(str);
+                            $("#text_area2").val(storedValue[0]);
+                            console.dir(storedValue[0])
+                        }
+                        let round = Math.round(storedValue[3]*100)
+                        $("#seikairitsu").html(round + "%")
+                        $("#seikairitsu").show()
+                        $("#title").show()
+                        $("#hantei2").html("不正解")
+                        $("#hantei2").show()
+                        console.log(round)      
+                    }
+
+                })
+
+                 // ボタン2をクリック
+                 $('#sentaku2').on('click', function() {
+                    const word= $("#text_area").val();
+                    if(localStorage.getItem(word)){
+                        const str = localStorage.getItem(word);
+                        var storedValue = JSON.parse(str);
+                        $("#text_area2").val(storedValue[0]);
+                        console.dir(storedValue[0])
+                    }
+                    
+                    if(random ==1){
+                        const word= $("#text_area").val();
+                        const mean= $("#text_area2").val();
+                        const str = localStorage.getItem(word);
+                        var storedValue = JSON.parse(str)
+                        seikai = storedValue[1]
+                        fuseikai = storedValue[2]
+                        seikai= seikai+1
+                        seikairitsu = seikai/(seikai + fuseikai)
+                        var array =[mean,seikai,fuseikai,seikairitsu];
+                        console.dir(array)
+                        var total = JSON.stringify(array);
+                        localStorage.setItem(word,total)
+                        console.dir(total)
+                    
+                        if(localStorage.getItem(word)){
+                        const str = localStorage.getItem(word);
+                        var storedValue = JSON.parse(str);
+                        $("#text_area2").val(storedValue[0]);
+                        console.dir(storedValue[0])
+                        }
+                        let round = Math.round(storedValue[3]*100)
+                        $("#seikairitsu").html(round + "%")
+                        $("#seikairitsu").show()
+                        $("#title").show()
+                        $("#hantei2").html("正解")
+                        $("#hantei2").show()
+                       
+
+                    }else{
+                        const word= $("#text_area").val();
+                        const mean= $("#text_area2").val();
+                        const str = localStorage.getItem(word);
+                        var storedValue = JSON.parse(str)
+                        seikai = storedValue[1]
+                        fuseikai = storedValue[2]
+                        fuseikai= fuseikai+1
+                        seikairitsu = seikai/(seikai + fuseikai)
+                        var array =[mean,seikai,fuseikai,seikairitsu];
+                        console.dir(array)
+                        var total = JSON.stringify(array);
+                        localStorage.setItem(word,total)
+                        console.dir(total)
+
+                        if(localStorage.getItem(word)){
+                            const str = localStorage.getItem(word);
+                            var storedValue = JSON.parse(str);
+                            $("#text_area2").val(storedValue[0]);
+                            console.dir(storedValue[0])
+                        }
+                        let round = Math.round(storedValue[3]*100)
+                        $("#seikairitsu").html(round + "%")
+                        $("#seikairitsu").show()
+                        $("#title").show()
+                        $("#hantei2").html("不正解")
+                        $("#hantei2").show()      
+                    }
+                })
+
+                // ボタン3をクリック
+                $('#sentaku3').on('click', function() {
+                    const word= $("#text_area").val();
+                    if(localStorage.getItem(word)){
+                        const str = localStorage.getItem(word);
+                        var storedValue = JSON.parse(str);
+                        $("#text_area2").val(storedValue[0]);
+                        console.dir(storedValue[0])
+                    }
+                    
+                    if(random ==2){
+                        const word= $("#text_area").val();
+                        const mean= $("#text_area2").val();
+                        const str = localStorage.getItem(word);
+                        var storedValue = JSON.parse(str)
+                        seikai = storedValue[1]
+                        fuseikai = storedValue[2]
+                        seikai= seikai+1
+                        seikairitsu = seikai/(seikai + fuseikai)
+                        var array =[mean,seikai,fuseikai,seikairitsu];
+                        console.dir(array)
+                        var total = JSON.stringify(array);
+                        localStorage.setItem(word,total)
+                        console.dir(total)
+                    
+                        if(localStorage.getItem(word)){
+                        const str = localStorage.getItem(word);
+                        var storedValue = JSON.parse(str);
+                        $("#text_area2").val(storedValue[0]);
+                        console.dir(storedValue[0])
+                        }
+                        let round = Math.round(storedValue[3]*100)
+                        $("#seikairitsu").html(round + "%")
+                        $("#seikairitsu").show()
+                        $("#title").show()
+                        $("#hantei2").html("正解")
+                        $("#hantei2").show()
+
+                    }else{
+                        const word= $("#text_area").val();
+                        const mean= $("#text_area2").val();
+                        const str = localStorage.getItem(word);
+                        var storedValue = JSON.parse(str)
+                        seikai = storedValue[1]
+                        fuseikai = storedValue[2]
+                        fuseikai= fuseikai+1
+                        seikairitsu = seikai/(seikai + fuseikai)
+                        var array =[mean,seikai,fuseikai,seikairitsu];
+                        console.dir(array)
+                        var total = JSON.stringify(array);
+                        localStorage.setItem(word,total)
+                        console.dir(total)
+
+                        if(localStorage.getItem(word)){
+                            const str = localStorage.getItem(word);
+                            var storedValue = JSON.parse(str);
+                            $("#text_area2").val(storedValue[0]);
+                            console.dir(storedValue[0])
+                        }
+                        let round = Math.round(storedValue[3]*100)
+                        $("#seikairitsu").html(round + "%")
+                        $("#seikairitsu").show()
+                        $("#title").show()
+                        $("#hantei2").html("不正解")
+                        $("#hantei2").show()      
+                    }
+
+                })
 
             });
-        
+
         });
         //ロード時に表示
         //※こんなこともできる例
