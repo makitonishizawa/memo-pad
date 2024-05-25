@@ -174,16 +174,24 @@
                 if (keys.length === 0) {
                     return null;
                 }    
-            var dummy1 = Math.floor(Math.random()*keys.length)
-            var randomKey2 = getRandomLocalStorageKey();
-            const str3 = localStorage.getItem(randomKey2);
-            var storedValue3 = JSON.parse(str3);
-            console.log(keys.length)
+                var dummy1 = Math.floor(Math.random()*keys.length)
+                var randomKey2 = getRandomLocalStorageKey();
+                    if (randomKey2 == randomKey){
+                        randomKey2 = getRandomLocalStorageKey();
+                    }else randomKey2 ==randomKey2
+
+                const str3 = localStorage.getItem(randomKey2);
+                var storedValue3 = JSON.parse(str3);
+                console.log(keys.length)
     
                 
             //ダミー2
                 var dummy2 = Math.floor(Math.random()*keys.length)
                 var randomKey3 = getRandomLocalStorageKey();
+                    if (randomKey3 == (randomKey, randomKey2)){
+                        randomKey3 = getRandomLocalStorageKey();
+                    }else randomKey3 ==randomKey3
+
                 const str4 = localStorage.getItem(randomKey3);
                 var storedValue4 = JSON.parse(str4);
                 
