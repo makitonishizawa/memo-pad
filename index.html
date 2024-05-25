@@ -12,7 +12,7 @@
 <body>
 
     <header>
-        <h1 id="top">英単語帳1</h1>
+        <h1 id="top">英単語帳</h1>
     </header>
 
     <main style="display:none;">
@@ -24,7 +24,7 @@
             <li id="answer">答え</li>
         </ul>
        
-        <div id="test">テスト</div>
+        <div id="test">テスト ↓正しい答えを選んでください↓ </div>
         <div id="question"></div>
 
         <div id="sentakushi">
@@ -34,8 +34,8 @@
         </div>
     
         <div id="hantei">
-            <button id="right">正解</button>
-            <button id="wrong">不正解</button>
+            <!-- <button id="right">正解</button> -->
+            <!-- <button id="wrong">不正解</button> -->
             <button id="next">Next</button>
         </div>
 
@@ -234,6 +234,7 @@
                         $("#title").show()
                         $("#hantei2").html("正解")
                         $("#hantei2").show()
+                        $("#kekka").show()
                         console.log(round)
 
                     }else{
@@ -263,6 +264,7 @@
                         $("#title").show()
                         $("#hantei2").html("不正解")
                         $("#hantei2").show()
+                        $("#kekka").show()
                         console.log(round)      
                     }
 
@@ -305,6 +307,7 @@
                         $("#title").show()
                         $("#hantei2").html("正解")
                         $("#hantei2").show()
+                        $("#kekka").show()
                        
 
                     }else{
@@ -333,7 +336,8 @@
                         $("#seikairitsu").show()
                         $("#title").show()
                         $("#hantei2").html("不正解")
-                        $("#hantei2").show()      
+                        $("#hantei2").show() 
+                        $("#kekka").show()     
                     }
                 })
 
@@ -374,6 +378,7 @@
                         $("#title").show()
                         $("#hantei2").html("正解")
                         $("#hantei2").show()
+                        $("#kekka").show()
 
                     }else{
                         const word= $("#text_area").val();
@@ -401,7 +406,8 @@
                         $("#seikairitsu").show()
                         $("#title").show()
                         $("#hantei2").html("不正解")
-                        $("#hantei2").show()      
+                        $("#hantei2").show() 
+                        $("#kekka").show()     
                     }
 
                 })
