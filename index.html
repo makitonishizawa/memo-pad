@@ -16,8 +16,12 @@
     </header>
 
     <main style="display:none;">
-        <textarea id="text_area" placeholder="英単語"></textarea>
-        <textarea id="text_area2" placeholder="意味"></textarea>
+        
+        <div id="tango_imi">
+            <textarea id="text_area" placeholder="英単語"></textarea>
+            <textarea id="text_area2" placeholder="意味"></textarea>
+        </div>
+        <textarea id="text_area3" placeholder="メモ"></textarea>
         <ul>
             <li id="save">保存</li>
             <li id="clear">削除</li>
@@ -59,7 +63,8 @@
         $("#save").on("click", function(){
             const word= $("#text_area").val();
             const mean= $("#text_area2").val();
-            var dataToSave = JSON.stringify([mean, 0, 0, 0]);
+            const memo= $("#text_area3").val();
+            var dataToSave = JSON.stringify([mean, 0, 0, 0,memo]);
             localStorage.setItem(word,dataToSave);
             alert("saveしました")
         })
@@ -80,63 +85,63 @@
                 const str = localStorage.getItem(word);
                 var storedValue = JSON.parse(str);
                 $("#text_area2").val(storedValue[0]);
+                $("#text_area3").val(storedValue[4]);
                 console.dir(storedValue[0])
             }
         })
 
-        //4.正解数保存
-        $("#right").on("click", function(){
-            const word= $("#text_area").val();
-            const mean= $("#text_area2").val();
-            const str = localStorage.getItem(word);
-            var storedValue = JSON.parse(str)
-            seikai = storedValue[1]
-            fuseikai = storedValue[2]
-            seikai= seikai+1
-            seikairitsu = seikai/(seikai + fuseikai)
-            var array =[mean,seikai,fuseikai,seikairitsu];
-            console.dir(array)
-            var total = JSON.stringify(array);
-            localStorage.setItem(word,total)
-            console.dir(total)
+        // //4.正解数保存
+        // $("#right").on("click", function(){
+        //     const word= $("#text_area").val();
+        //     const mean= $("#text_area2").val();
+        //     const str = localStorage.getItem(word);
+        //     var storedValue = JSON.parse(str)
+        //     seikai = storedValue[1]
+        //     fuseikai = storedValue[2]
+        //     seikai= seikai+1
+        //     seikairitsu = seikai/(seikai + fuseikai)
+        //     var array =[mean,seikai,fuseikai,seikairitsu];
+        //     console.dir(array)
+        //     var total = JSON.stringify(array);
+        //     localStorage.setItem(word,total)
+        //     console.dir(total)
             
-            if(localStorage.getItem(word)){
-                const str = localStorage.getItem(word);
-                var storedValue = JSON.parse(str);
-                $("#text_area2").val(storedValue[0]);
-                console.dir(storedValue[0])
-            }
-            let round = Math.round(storedValue[3]*100)
-            $("#seikairitsu").html(round + "%")
-            $("#title").show()
+        //     if(localStorage.getItem(word)){
+        //         const str = localStorage.getItem(word);
+        //         var storedValue = JSON.parse(str);
+        //         $("#text_area2").val(storedValue[0]);
+        //         console.dir(storedValue[0])
+        //     }
+        //     let round = Math.round(storedValue[3]*100)
+        //     $("#seikairitsu").html(round + "%")
+        //     $("#title").show()
 
-        })
-        $("#wrong").on("click", function(){
-            const word= $("#text_area").val();
-            const mean= $("#text_area2").val();
-            const str = localStorage.getItem(word);
-            var storedValue = JSON.parse(str)
-            seikai = storedValue[1]
-            fuseikai = storedValue[2]
-            fuseikai= fuseikai+1
-            seikairitsu = seikai/(seikai + fuseikai)
-            var array =[mean,seikai,fuseikai,seikairitsu];
-            console.dir(array)
-            var total = JSON.stringify(array);
-            localStorage.setItem(word,total)
-            console.dir(total)
+        // })
+        // $("#wrong").on("click", function(){
+        //     const word= $("#text_area").val();
+        //     const mean= $("#text_area2").val();
+        //     const str = localStorage.getItem(word);
+        //     var storedValue = JSON.parse(str)
+        //     seikai = storedValue[1]
+        //     fuseikai = storedValue[2]
+        //     fuseikai= fuseikai+1
+        //     seikairitsu = seikai/(seikai + fuseikai)
+        //     var array =[mean,seikai,fuseikai,seikairitsu];
+        //     console.dir(array)
+        //     var total = JSON.stringify(array);
+        //     localStorage.setItem(word,total)
+        //     console.dir(total)
 
-            if(localStorage.getItem(word)){
-                const str = localStorage.getItem(word);
-                var storedValue = JSON.parse(str);
-                $("#text_area2").val(storedValue[0]);
-                console.dir(storedValue[0])
-            }
-            let round = Math.round(storedValue[3]*100)
-            $("#seikairitsu").html(round + "%")
-            $("#title").show()
-
-        })
+        //     if(localStorage.getItem(word)){
+        //         const str = localStorage.getItem(word);
+        //         var storedValue = JSON.parse(str);
+        //         $("#text_area2").val(storedValue[0]);
+        //         console.dir(storedValue[0])
+        //     }
+        //     let round = Math.round(storedValue[3]*100)
+        //     $("#seikairitsu").html(round + "%")
+        //     $("#title").show()
+        // })
 
         // 次の問題へ
         $(document).ready(function() {
@@ -153,9 +158,11 @@
                 $("#hantei2").hide()
                 $("#kekka").hide()
 
+                $('#text_area').val("")
                 $('#text_area2').val("")
+                $('#text_area3').val("")
                 var randomKey = getRandomLocalStorageKey();
-                $('#text_area').text(randomKey ? randomKey : "LocalStorageが空です。");
+                $('#text_area').val(randomKey ? randomKey : "LocalStorageが空です。");
                 console.log(randomKey)
             
             //対応する意味を表示
@@ -205,18 +212,20 @@
                         const str = localStorage.getItem(word);
                         var storedValue = JSON.parse(str);
                         $("#text_area2").val(storedValue[0]);
-                        console.dir(storedValue[0])
+                        $("#text_area3").val(storedValue[4]);
+                        console.dir(storedValue[4])
                     }
                     if(random ==0){    
                         const word= $("#text_area").val();
                         const mean= $("#text_area2").val();
+                        const memo= $("#text_area3").val();
                         const str = localStorage.getItem(word);
                         var storedValue = JSON.parse(str)
                         seikai = storedValue[1]
                         fuseikai = storedValue[2]
                         seikai= seikai+1
                         seikairitsu = seikai/(seikai + fuseikai)
-                        var array =[mean,seikai,fuseikai,seikairitsu];
+                        var array =[mean,seikai,fuseikai,seikairitsu,memo];
                         console.dir(array)
                         var total = JSON.stringify(array);
                         localStorage.setItem(word,total)
@@ -226,7 +235,8 @@
                         const str = localStorage.getItem(word);
                         var storedValue = JSON.parse(str);
                         $("#text_area2").val(storedValue[0]);
-                        console.dir(storedValue[0])
+                        $("#text_area3").val(storedValue[4]);
+                        console.dir(storedValue[4])
                         }
                         let round = Math.round(storedValue[3]*100)
                         $("#seikairitsu").html(round + "%")
@@ -240,13 +250,14 @@
                     }else{
                         const word= $("#text_area").val();
                         const mean= $("#text_area2").val();
+                        const memo= $("#text_area3").val();
                         const str = localStorage.getItem(word);
                         var storedValue = JSON.parse(str)
                         seikai = storedValue[1]
                         fuseikai = storedValue[2]
                         fuseikai= fuseikai+1
                         seikairitsu = seikai/(seikai + fuseikai)
-                        var array =[mean,seikai,fuseikai,seikairitsu];
+                        var array =[mean,seikai,fuseikai,seikairitsu,memo];
                         console.dir(array)
                         var total = JSON.stringify(array);
                         localStorage.setItem(word,total)
@@ -256,7 +267,8 @@
                             const str = localStorage.getItem(word);
                             var storedValue = JSON.parse(str);
                             $("#text_area2").val(storedValue[0]);
-                            console.dir(storedValue[0])
+                            $("#text_area3").val(storedValue[4]);
+                            console.dir(storedValue[4])
                         }
                         let round = Math.round(storedValue[3]*100)
                         $("#seikairitsu").html(round + "%")
@@ -277,19 +289,21 @@
                         const str = localStorage.getItem(word);
                         var storedValue = JSON.parse(str);
                         $("#text_area2").val(storedValue[0]);
-                        console.dir(storedValue[0])
+                        $("#text_area3").val(storedValue[4]);
+                        console.dir(storedValue[4])
                     }
                     
                     if(random ==1){
                         const word= $("#text_area").val();
                         const mean= $("#text_area2").val();
+                        const memo= $("#text_area3").val();
                         const str = localStorage.getItem(word);
                         var storedValue = JSON.parse(str)
                         seikai = storedValue[1]
                         fuseikai = storedValue[2]
                         seikai= seikai+1
                         seikairitsu = seikai/(seikai + fuseikai)
-                        var array =[mean,seikai,fuseikai,seikairitsu];
+                        var array =[mean,seikai,fuseikai,seikairitsu,memo];
                         console.dir(array)
                         var total = JSON.stringify(array);
                         localStorage.setItem(word,total)
@@ -299,7 +313,8 @@
                         const str = localStorage.getItem(word);
                         var storedValue = JSON.parse(str);
                         $("#text_area2").val(storedValue[0]);
-                        console.dir(storedValue[0])
+                        $("#text_area3").val(storedValue[4]);
+                        console.dir(storedValue[4])
                         }
                         let round = Math.round(storedValue[3]*100)
                         $("#seikairitsu").html(round + "%")
@@ -313,13 +328,14 @@
                     }else{
                         const word= $("#text_area").val();
                         const mean= $("#text_area2").val();
+                        const memo= $("#text_area3").val();
                         const str = localStorage.getItem(word);
                         var storedValue = JSON.parse(str)
                         seikai = storedValue[1]
                         fuseikai = storedValue[2]
                         fuseikai= fuseikai+1
                         seikairitsu = seikai/(seikai + fuseikai)
-                        var array =[mean,seikai,fuseikai,seikairitsu];
+                        var array =[mean,seikai,fuseikai,seikairitsu,memo];
                         console.dir(array)
                         var total = JSON.stringify(array);
                         localStorage.setItem(word,total)
@@ -329,7 +345,8 @@
                             const str = localStorage.getItem(word);
                             var storedValue = JSON.parse(str);
                             $("#text_area2").val(storedValue[0]);
-                            console.dir(storedValue[0])
+                            $("#text_area3").val(storedValue[4]);
+                            console.dir(storedValue[4])
                         }
                         let round = Math.round(storedValue[3]*100)
                         $("#seikairitsu").html(round + "%")
@@ -348,19 +365,21 @@
                         const str = localStorage.getItem(word);
                         var storedValue = JSON.parse(str);
                         $("#text_area2").val(storedValue[0]);
-                        console.dir(storedValue[0])
+                        $("#text_area3").val(storedValue[4]);
+                        console.dir(storedValue[4])
                     }
                     
                     if(random ==2){
                         const word= $("#text_area").val();
                         const mean= $("#text_area2").val();
+                        const memo= $("#text_area3").val();
                         const str = localStorage.getItem(word);
                         var storedValue = JSON.parse(str)
                         seikai = storedValue[1]
                         fuseikai = storedValue[2]
                         seikai= seikai+1
                         seikairitsu = seikai/(seikai + fuseikai)
-                        var array =[mean,seikai,fuseikai,seikairitsu];
+                        var array =[mean,seikai,fuseikai,seikairitsu,memo];
                         console.dir(array)
                         var total = JSON.stringify(array);
                         localStorage.setItem(word,total)
@@ -370,7 +389,8 @@
                         const str = localStorage.getItem(word);
                         var storedValue = JSON.parse(str);
                         $("#text_area2").val(storedValue[0]);
-                        console.dir(storedValue[0])
+                        $("#text_area3").val(storedValue[4]);
+                        console.dir(storedValue[4])
                         }
                         let round = Math.round(storedValue[3]*100)
                         $("#seikairitsu").html(round + "%")
@@ -383,13 +403,14 @@
                     }else{
                         const word= $("#text_area").val();
                         const mean= $("#text_area2").val();
+                        const memo= $("#text_area3").val();
                         const str = localStorage.getItem(word);
                         var storedValue = JSON.parse(str)
                         seikai = storedValue[1]
                         fuseikai = storedValue[2]
                         fuseikai= fuseikai+1
                         seikairitsu = seikai/(seikai + fuseikai)
-                        var array =[mean,seikai,fuseikai,seikairitsu];
+                        var array =[mean,seikai,fuseikai,seikairitsu,memo];
                         console.dir(array)
                         var total = JSON.stringify(array);
                         localStorage.setItem(word,total)
@@ -399,7 +420,8 @@
                             const str = localStorage.getItem(word);
                             var storedValue = JSON.parse(str);
                             $("#text_area2").val(storedValue[0]);
-                            console.dir(storedValue[0])
+                            $("#text_area3").val(storedValue[4]);
+                            console.dir(storedValue[4])
                         }
                         let round = Math.round(storedValue[3]*100)
                         $("#seikairitsu").html(round + "%")

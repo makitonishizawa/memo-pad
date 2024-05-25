@@ -52,6 +52,13 @@ li:hover{
     background: #0066CC;
     color:#fff;
 }
+#tango_imi {
+    display: flex;
+    justify-content: center
+}
+
+
+
 #text_area{
   margin: 1%;
   width: 95%;
@@ -62,10 +69,18 @@ li:hover{
 #text_area2{
     margin: 1%;
     width: 95%;
+    height: 50px;
+    font-size:80%;
+    box-shadow: 3px 3px 3px 3px #555;
+  }
+  #text_area3{
+    margin: 1%;
+    width: 95%;
     height: 100px;
     font-size:80%;
     box-shadow: 3px 3px 3px 3px #555;
   }
+
 
   #sentakushi {
     display:flex;
