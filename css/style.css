@@ -87,7 +87,7 @@ li:hover{
     justify-content: center;
 }
 
-  #sentaku1 {
+#sentaku1 {
     margin-left: 10px;
     margin-right: 10px;
     font-size: 30px;
@@ -167,4 +167,41 @@ li:hover{
     font-size: 30px;
     margin-top: 20px;
     color: blue;
+}
+
+#ichiran_total {
+    display:flex;
+    justify-content: center;
+
+}
+#ichiran_title {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 30px;
+    width: 200px;
+    border-radius: 10px;
+    height: 50px;
+    margin-bottom: 20px;
+}
+#ichiran_ichi {
+    display: flex;
+    justify-content: center;
+}
+
+/* テーブル全体のスタイル設定 */
+#ichiran {
+    width: 30%; /* テーブルの幅を100%に設定 */
+    border-collapse: collapse; /* 罫線を隣接させる */
+    font-size: 20px;
+}
+/* テーブルのヘッダーとセルのスタイル */
+#ichiran th, #ichiran td {
+    border: 1px solid black; /* 黒い罫線 */
+    padding: 8px; /* 内側の余白 */
+    text-align: left; /* テキストを左寄せ */
+}
+/* テーブルのヘッダーの背景色とフォントスタイル */
+#ichiran thead th {
+    background-color: #d9e8d9; /* 背景色をグレーに */
+    font-weight: bold; /* フォントを太字に */
 }

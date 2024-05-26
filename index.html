@@ -50,6 +50,22 @@
             <h1 id="seikairitsu"></h1>
         </div>
 
+        <div id="ichiran_total">
+            <button id="ichiran_title">一覧表示</button>  
+        </div>
+        <div id="ichiran_ichi">
+            <table id="ichiran">
+                <thead>
+                    <tr>
+                        <th>単語</th>
+                        <th>正解率</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ここにJavaScriptでデータを動的に挿入します -->
+                </tbody>
+            </table>
+        </div>
     </main>
 
     <script>
@@ -445,6 +461,40 @@
             });
 
         });
+
+        // 一覧表示
+            $("#ichiran_title").on("click", function() {
+                // 既存の表示内容をクリア
+                const tbody = document.querySelector('#ichiran tbody');
+                tbody.innerHTML = ''; // 既存の内容を消去
+
+                // データを格納する配列を初期化
+                let items = [];
+
+                // ローカルストレージの全キーを繰り返し処理
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    const value = JSON.parse(localStorage.getItem(key));
+
+                    // キーと値を含むオブジェクトを配列に追加
+                    items.push({ key: key, data: value });
+                }
+
+                // 特定のデータプロパティ（ここでは4番目の要素、インデックスは3）に基づいて配列をソート
+                items.sort((a, b) => parseFloat(a.data[3]) - parseFloat(b.data[3]));
+
+                // ソートされた結果をHTMLに出力
+                items.forEach(item => {
+                    let scaledValue = parseFloat(item.data[3]) * 100; // データ値を100倍
+                    let roundedValue = Math.round(scaledValue); // 四捨五入して整数に
+                    const row = document.createElement('tr'); // 新しい行を作成
+                    row.innerHTML = `<td>${item.key}</td><td>${roundedValue}%</td>`; // 行にデータを追加
+                    tbody.appendChild(row); // 行をtbodyに追加
+                });
+            });
+
+
+
         //ロード時に表示
         //※こんなこともできる例
     </script>
